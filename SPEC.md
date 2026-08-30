@@ -35,7 +35,7 @@ Plan JSON:
 {
   "requested": 6,
   "spares": 1,
-  "ranges": [{"start_mhz": "470.100", "end_mhz": "474.000", "step_khz": 25}],
+  "ranges": [{"start_mhz": "470.100", "end_mhz": "480.000", "step_khz": 50}],
   "minimum_spacing_khz": 200,
   "intermod_guard_khz": 250,
   "exclusions": [{"start_mhz": "471.000", "end_mhz": "471.300", "label": "known carrier"}],
@@ -108,4 +108,3 @@ Use explicit domain names, immutable dataclasses, integer kHz internally, bounda
 - Candidate optimality: first deterministic feasible set under the declared search order, not a proof of globally best RF quality.
 - Product model: third-order only; the report names this limitation.
 - Regulatory data: caller-owned input, never bundled.
-
