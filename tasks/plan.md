@@ -38,7 +38,7 @@ Build the highest-risk path first: exact third-order conflict evidence and a bou
 - [x] Add README, examples, decision record, contributing/security guidance, changelog, and failure recovery.
 - [x] Add cross-platform CI, tag release workflow, deterministic example bundle, and local release gate.
 - [x] Run a five-axis self-review and repair required findings.
-- [ ] Commit, push, wait for CI, publish `v0.1.0`, download and verify assets, then send Gmail.
+- [x] Commit, push, wait for CI, publish `v0.1.0`, download and verify assets, then send Gmail.
 
 ## Risks and mitigations
 

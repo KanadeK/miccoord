@@ -30,7 +30,9 @@
   - Verify: `uv run python scripts/check.py` passes from a clean checkout.
   - Files: delivery and documentation files only.
 
-- [ ] Task 7: Review and publish
+- [x] Task 7: Review and publish
   - Acceptance: required review findings fixed, clean Git state, public CI/tag/release/assets/install/contributor checks pass, then Gmail is sent.
-  - Local status: five-axis self-review findings fixed; the release-equivalent gate passes on Python 3.13 with 98% branch coverage.
-  - Verify: recorded URLs, run IDs, asset hashes, install transcript, and Gmail message ID.
+  - Local status: five-axis self-review findings fixed; 67 tests and the release-equivalent gate pass on Python 3.13 with 98.10% branch coverage.
+  - Public status: CI run `33320241723` passed on Ubuntu/Windows and Python 3.11/3.13; release run `33320319834` published `v0.1.0` as a non-draft release.
+  - Asset status: downloaded wheel, sdist, and examples archive match `SHA256SUMS`; the public wheel installs cleanly and reproduces the documented plan.
+  - Closure: GitHub contributors contains only `KanadeK`; Gmail message `1a05357d9ede1dae` was sent after public verification.
