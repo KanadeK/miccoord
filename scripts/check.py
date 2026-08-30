@@ -47,7 +47,7 @@ def _run(
     print(f"\n[{stage}]", flush=True)
     print(f"$ {shlex.join(command)}", flush=True)
     environment = os.environ.copy()
-    environment["UV_CACHE_DIR"] = str(ROOT.parent / ".uv-cache-miccoord")
+    environment.setdefault("UV_CACHE_DIR", str(ROOT.parent / ".uv-cache-miccoord"))
     result = subprocess.run(command, cwd=cwd, env=environment, check=False)
     if result.returncode != expected:
         raise RuntimeError(
