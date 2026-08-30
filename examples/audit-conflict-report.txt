@@ -1,0 +1,10 @@
+MicCoord audit: CONFLICTS
+Frequencies (MHz): 590.000, 595.000, 600.000
+frequency_count: 3
+conflict_count: 3
+Conflicts:
+- two_tone_third_order: 2*595.000-600.000 -> 590.000 MHz, target 590.000 MHz, separation 0 kHz
+- two_tone_third_order: 2*595.000-590.000 -> 600.000 MHz, target 600.000 MHz, separation 0 kHz
+- three_tone_third_order: 590.000+600.000-595.000 -> 595.000 MHz, target 595.000 MHz, separation 0 kHz
+Diagnostics:
+- Checks carrier spacing and third-order two-/three-transmitter products only; confirm local rules, device compatibility, and the on-site spectrum before transmitting.

@@ -1,0 +1,13 @@
+{
+  "requested": 6,
+  "ranges": [
+    {
+      "start_mhz": "470.100",
+      "end_mhz": "480.000",
+      "step_khz": 50
+    }
+  ],
+  "minimum_spacing_khz": 200,
+  "intermod_guard_khz": 250,
+  "max_search_nodes": 1
+}

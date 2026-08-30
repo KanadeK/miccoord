@@ -1,0 +1,34 @@
+{
+  "schema_version": "miccoord.report.v1",
+  "command": "plan",
+  "status": "FOUND",
+  "model": {
+    "minimum_spacing_khz": 200,
+    "intermod_guard_khz": 250,
+    "intermod_order": 3
+  },
+  "summary": {
+    "requested": 6,
+    "spares": 1,
+    "requested_total": 7,
+    "found": 7,
+    "candidate_count": 187,
+    "excluded_by_exclusions": 7,
+    "excluded_by_scan": 5,
+    "nodes_visited": 179,
+    "search_complete": true
+  },
+  "frequencies_mhz": [
+    "470.100",
+    "470.500",
+    "471.350",
+    "472.850",
+    "474.600",
+    "476.600",
+    "479.600"
+  ],
+  "conflicts": [],
+  "diagnostics": [
+    "Checks carrier spacing and third-order two-/three-transmitter products only; confirm local rules, device compatibility, and the on-site spectrum before transmitting."
+  ]
+}

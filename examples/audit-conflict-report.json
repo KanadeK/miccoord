@@ -1,0 +1,61 @@
+{
+  "schema_version": "miccoord.report.v1",
+  "command": "audit",
+  "status": "CONFLICTS",
+  "model": {
+    "minimum_spacing_khz": 200,
+    "intermod_guard_khz": 250,
+    "intermod_order": 3
+  },
+  "summary": {
+    "frequency_count": 3,
+    "conflict_count": 3
+  },
+  "frequencies_mhz": [
+    "590.000",
+    "595.000",
+    "600.000"
+  ],
+  "conflicts": [
+    {
+      "kind": "two_tone_third_order",
+      "sources_mhz": [
+        "595.000",
+        "600.000"
+      ],
+      "target_mhz": "590.000",
+      "product_mhz": "590.000",
+      "separation_khz": 0,
+      "required_separation_khz": 250,
+      "expression": "2*595.000-600.000"
+    },
+    {
+      "kind": "two_tone_third_order",
+      "sources_mhz": [
+        "590.000",
+        "595.000"
+      ],
+      "target_mhz": "600.000",
+      "product_mhz": "600.000",
+      "separation_khz": 0,
+      "required_separation_khz": 250,
+      "expression": "2*595.000-590.000"
+    },
+    {
+      "kind": "three_tone_third_order",
+      "sources_mhz": [
+        "590.000",
+        "595.000",
+        "600.000"
+      ],
+      "target_mhz": "595.000",
+      "product_mhz": "595.000",
+      "separation_khz": 0,
+      "required_separation_khz": 250,
+      "expression": "590.000+600.000-595.000"
+    }
+  ],
+  "diagnostics": [
+    "Checks carrier spacing and third-order two-/three-transmitter products only; confirm local rules, device compatibility, and the on-site spectrum before transmitting."
+  ]
+}

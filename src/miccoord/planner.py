@@ -48,7 +48,7 @@ class PlanConfig:
 class CandidatePool:
     frequencies_khz: tuple[int, ...]
     generated: int
-    excluded_by_ranges: int
+    excluded_by_exclusions: int
     excluded_by_scan: int
 
 
@@ -60,7 +60,7 @@ class PlanResult:
     candidate_count: int
     nodes_visited: int
     search_complete: bool
-    excluded_by_ranges: int
+    excluded_by_exclusions: int
     excluded_by_scan: int
 
 
@@ -69,12 +69,18 @@ def build_candidate_pool(config: PlanConfig, scan_points: tuple[ScanPoint, ...])
 
     generated_values: set[int] = set()
     for allowed in config.ranges:
+        range_count = (allowed.end_khz - allowed.start_khz) // allowed.step_khz + 1
+        if range_count > MAX_CANDIDATES:
+            raise InputError(
+                f"one range generates {range_count} candidates; the v0.1 limit is {MAX_CANDIDATES}"
+            )
         generated_values.update(range(allowed.start_khz, allowed.end_khz + 1, allowed.step_khz))
+        if len(generated_values) > MAX_CANDIDATES:
+            raise InputError(
+                f"ranges generate more than {MAX_CANDIDATES} unique candidates; "
+                f"the v0.1 limit is {MAX_CANDIDATES}"
+            )
     generated = len(generated_values)
-    if generated > MAX_CANDIDATES:
-        raise InputError(
-            f"ranges generate {generated} candidates; the v0.1 limit is {MAX_CANDIDATES}"
-        )
 
     after_ranges = tuple(
         frequency
@@ -96,7 +102,7 @@ def build_candidate_pool(config: PlanConfig, scan_points: tuple[ScanPoint, ...])
     return CandidatePool(
         frequencies_khz=after_scan,
         generated=generated,
-        excluded_by_ranges=generated - len(after_ranges),
+        excluded_by_exclusions=generated - len(after_ranges),
         excluded_by_scan=len(after_ranges) - len(after_scan),
     )
 
@@ -157,6 +163,6 @@ def plan_frequencies(config: PlanConfig, scan_points: tuple[ScanPoint, ...]) -> 
         candidate_count=len(candidates),
         nodes_visited=nodes_visited,
         search_complete=not exhausted,
-        excluded_by_ranges=pool.excluded_by_ranges,
+        excluded_by_exclusions=pool.excluded_by_exclusions,
         excluded_by_scan=pool.excluded_by_scan,
     )

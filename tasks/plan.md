@@ -15,29 +15,29 @@ Build the highest-risk path first: exact third-order conflict evidence and a bou
 
 ### Phase 1: Contracts and domain proof
 
-- [ ] Define immutable input/report models and stable exit semantics.
-- [ ] Prove carrier-spacing and third-order witnesses with failing tests, then implement the conflict engine.
+- [x] Define immutable input/report models and stable exit semantics.
+- [x] Prove carrier-spacing and third-order witnesses with failing tests, then implement the conflict engine.
 
 ### Checkpoint: Domain
 
-- [ ] Focused tests pass and Shure's 590/595/600 example produces the expected witness.
+- [x] Focused tests pass and Shure's 590/595/600 example produces the expected witness.
 
 ### Phase 2: Real planning flow
 
-- [ ] Generate candidates from ranges and filter declared exclusions.
-- [ ] Import thresholded scan CSV evidence.
-- [ ] Implement bounded deterministic search with strongest-partial and exhaustion reports.
-- [ ] Connect `plan` and `audit` through real CLI subprocess tests.
+- [x] Generate candidates from ranges and filter declared exclusions.
+- [x] Import thresholded scan CSV evidence.
+- [x] Implement bounded deterministic search with strongest-partial and exhaustion reports.
+- [x] Connect `plan` and `audit` through real CLI subprocess tests.
 
 ### Checkpoint: User flow
 
-- [ ] Valid, conflict, scan, infeasible, and malformed examples exhibit exit codes 0/1/2 as specified.
+- [x] Valid, conflict, scan, infeasible, and malformed examples exhibit exit codes 0/1/2 as specified.
 
 ### Phase 3: Delivery
 
-- [ ] Add README, examples, decision record, contributing/security guidance, changelog, and failure recovery.
-- [ ] Add cross-platform CI, tag release workflow, deterministic example bundle, and local release gate.
-- [ ] Run independent five-axis review and repair required findings.
+- [x] Add README, examples, decision record, contributing/security guidance, changelog, and failure recovery.
+- [x] Add cross-platform CI, tag release workflow, deterministic example bundle, and local release gate.
+- [x] Run a five-axis self-review and repair required findings.
 - [ ] Commit, push, wait for CI, publish `v0.1.0`, download and verify assets, then send Gmail.
 
 ## Risks and mitigations
@@ -52,4 +52,3 @@ Build the highest-risk path first: exact third-order conflict evidence and a bou
 ## Open questions
 
 None blocking. Scope-expanding questions are deferred to post-v0.1 issues only after real user evidence.
-

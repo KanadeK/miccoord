@@ -1,0 +1,30 @@
+{
+  "schema_version": "miccoord.report.v1",
+  "command": "plan",
+  "status": "INFEASIBLE",
+  "model": {
+    "minimum_spacing_khz": 200,
+    "intermod_guard_khz": 250,
+    "intermod_order": 3
+  },
+  "summary": {
+    "requested": 3,
+    "spares": 0,
+    "requested_total": 3,
+    "found": 2,
+    "candidate_count": 4,
+    "excluded_by_exclusions": 0,
+    "excluded_by_scan": 0,
+    "nodes_visited": 9,
+    "search_complete": true
+  },
+  "frequencies_mhz": [
+    "470.000",
+    "470.300"
+  ],
+  "conflicts": [],
+  "diagnostics": [
+    "Checks carrier spacing and third-order two-/three-transmitter products only; confirm local rules, device compatibility, and the on-site spectrum before transmitting.",
+    "The bounded candidate pool was searched completely; no set reached the requested count."
+  ]
+}

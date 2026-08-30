@@ -1,4 +1,7 @@
+import pytest
+
 from miccoord.intermod import audit_frequencies
+from miccoord.model import InputError
 from miccoord.planner import (
     Exclusion,
     FrequencyRange,
@@ -34,7 +37,7 @@ def test_candidate_pool_applies_inclusive_exclusions() -> None:
     pool = build_candidate_pool(config, ())
 
     assert pool.frequencies_khz == (470_000, 470_200)
-    assert pool.excluded_by_ranges == 3
+    assert pool.excluded_by_exclusions == 3
     assert pool.excluded_by_scan == 0
 
 
@@ -52,6 +55,13 @@ def test_candidate_pool_blocks_only_scan_points_at_or_above_threshold() -> None:
 
     assert pool.frequencies_khz == (470_000, 470_100, 470_300, 470_400)
     assert pool.excluded_by_scan == 1
+
+
+def test_candidate_pool_rejects_oversized_range_before_materializing_it() -> None:
+    config = _config(ranges=(FrequencyRange(1, 100_000_000, 1),))
+
+    with pytest.raises(InputError, match="one range generates 100000000 candidates"):
+        build_candidate_pool(config, ())
 
 
 def test_planner_finds_requested_set_that_audits_cleanly() -> None:

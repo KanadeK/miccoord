@@ -1,0 +1,5 @@
+{
+  "frequencies_mhz": ["590.000", "595.000", "600.000"],
+  "minimum_spacing_khz": 200,
+  "intermod_guard_khz": 250
+}

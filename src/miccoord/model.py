@@ -11,6 +11,7 @@ ConflictKind = Literal[
     "two_tone_third_order",
     "three_tone_third_order",
 ]
+MAX_FREQUENCY_MHZ = Decimal("100000")
 
 
 class InputError(ValueError):
@@ -20,15 +21,18 @@ class InputError(ValueError):
 def parse_mhz_to_khz(value: object, field: str) -> int:
     """Parse a positive whole-kHz MHz value without binary float arithmetic."""
 
+    message = f"{field} must be from 0.001 to 100000.000 MHz at whole-kHz precision"
     if isinstance(value, bool) or value is None:
-        raise InputError(f"{field} must be a positive MHz value at whole-kHz precision")
+        raise InputError(message)
     try:
         mhz = Decimal(str(value))
     except (InvalidOperation, ValueError):
-        raise InputError(f"{field} must be a positive MHz value at whole-kHz precision") from None
+        raise InputError(message) from None
+    if not mhz.is_finite() or mhz <= 0 or mhz > MAX_FREQUENCY_MHZ:
+        raise InputError(message)
     khz = mhz * 1000
-    if not khz.is_finite() or khz <= 0 or khz != khz.to_integral_value():
-        raise InputError(f"{field} must be a positive MHz value at whole-kHz precision")
+    if khz != khz.to_integral_value():
+        raise InputError(message)
     return int(khz)
 
 

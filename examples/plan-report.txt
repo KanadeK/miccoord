@@ -1,0 +1,13 @@
+MicCoord plan: FOUND
+Frequencies (MHz): 470.100, 470.500, 471.350, 472.850, 474.600, 476.600, 479.600
+requested: 6
+spares: 1
+requested_total: 7
+found: 7
+candidate_count: 187
+excluded_by_exclusions: 7
+excluded_by_scan: 5
+nodes_visited: 179
+search_complete: true
+Diagnostics:
+- Checks carrier spacing and third-order two-/three-transmitter products only; confirm local rules, device compatibility, and the on-site spectrum before transmitting.

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 from miccoord.io import AuditConfig
 from miccoord.model import Conflict, format_mhz
 from miccoord.planner import PlanConfig, PlanResult
@@ -39,7 +41,7 @@ def build_plan_report(config: PlanConfig, result: PlanResult) -> dict[str, objec
             "requested_total": result.requested_total,
             "found": len(result.frequencies_khz),
             "candidate_count": result.candidate_count,
-            "excluded_by_ranges": result.excluded_by_ranges,
+            "excluded_by_exclusions": result.excluded_by_exclusions,
             "excluded_by_scan": result.excluded_by_scan,
             "nodes_visited": result.nodes_visited,
             "search_complete": result.search_complete,
@@ -72,26 +74,21 @@ def build_audit_report(config: AuditConfig, conflicts: tuple[Conflict, ...]) -> 
 
 def render_text(report: dict[str, object]) -> str:
     lines = [f"MicCoord {report['command']}: {report['status']}"]
-    frequencies = report["frequencies_mhz"]
-    assert isinstance(frequencies, list)
+    frequencies = cast(list[str], report["frequencies_mhz"])
     lines.append("Frequencies (MHz): " + (", ".join(frequencies) if frequencies else "none"))
-    summary = report["summary"]
-    assert isinstance(summary, dict)
+    summary = cast(dict[str, object], report["summary"])
     for key, value in summary.items():
         lines.append(f"{key}: {str(value).lower() if isinstance(value, bool) else value}")
-    conflicts = report["conflicts"]
-    assert isinstance(conflicts, list)
+    conflicts = cast(list[dict[str, object]], report["conflicts"])
     if conflicts:
         lines.append("Conflicts:")
         for conflict in conflicts:
-            assert isinstance(conflict, dict)
             lines.append(
                 "- "
                 f"{conflict['kind']}: {conflict['expression']} -> {conflict['product_mhz']} MHz, "
                 f"target {conflict['target_mhz']} MHz, separation {conflict['separation_khz']} kHz"
             )
     lines.append("Diagnostics:")
-    diagnostics = report["diagnostics"]
-    assert isinstance(diagnostics, list)
+    diagnostics = cast(list[str], report["diagnostics"])
     lines.extend(f"- {message}" for message in diagnostics)
     return "\n".join(lines) + "\n"

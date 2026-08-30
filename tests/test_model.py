@@ -18,7 +18,20 @@ def test_parse_mhz_to_khz_accepts_exact_whole_khz_values(value: object, expected
     assert parse_mhz_to_khz(value, "frequency") == expected
 
 
-@pytest.mark.parametrize("value", [True, "470.1255", "not-a-frequency", 0, -1, None])
+@pytest.mark.parametrize(
+    "value",
+    [
+        True,
+        "470.1255",
+        "not-a-frequency",
+        0,
+        -1,
+        None,
+        "100000.001",
+        "1e999999",
+        "sNaN",
+    ],
+)
 def test_parse_mhz_to_khz_rejects_ambiguous_or_invalid_values(value: object) -> None:
     with pytest.raises(InputError, match="frequency"):
         parse_mhz_to_khz(value, "frequency")

@@ -1,0 +1,14 @@
+MicCoord plan: EXHAUSTED
+Frequencies (MHz): 470.100
+requested: 6
+spares: 0
+requested_total: 6
+found: 1
+candidate_count: 199
+excluded_by_exclusions: 0
+excluded_by_scan: 0
+nodes_visited: 1
+search_complete: false
+Diagnostics:
+- Checks carrier spacing and third-order two-/three-transmitter products only; confirm local rules, device compatibility, and the on-site spectrum before transmitting.
+- The node budget was exhausted; this is not proof that the requested set is infeasible.

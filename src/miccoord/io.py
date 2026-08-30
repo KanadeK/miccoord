@@ -45,15 +45,15 @@ def _load_json_object(path: Path, label: str) -> dict[str, object]:
         raise InputError(
             f"{label} is not valid JSON: line {error.lineno}, column {error.colno}"
         ) from None
+    except ValueError:
+        raise InputError(f"{label} contains a numeric value beyond the parser limit") from None
     if not isinstance(value, dict):
         raise InputError(f"{label} root must be a JSON object")
-    if not all(isinstance(key, str) for key in value):
-        raise InputError(f"{label} keys must be strings")
     return cast(dict[str, object], value)
 
 
 def _object(value: object, field: str) -> dict[str, object]:
-    if not isinstance(value, dict) or not all(isinstance(key, str) for key in value):
+    if not isinstance(value, dict):
         raise InputError(f"{field} must be an object")
     return cast(dict[str, object], value)
 
@@ -79,11 +79,11 @@ def _bounded_int(value: object, field: str, minimum: int, maximum: int) -> int:
 
 
 def _finite_float(value: object, field: str, minimum: float, maximum: float) -> float:
-    if isinstance(value, bool):
+    if isinstance(value, bool) or not isinstance(value, (int, float, str)):
         raise InputError(f"{field} must be a finite number from {minimum} to {maximum}")
     try:
-        number = float(value)  # type: ignore[arg-type]
-    except (TypeError, ValueError):
+        number = float(value)
+    except ValueError:
         raise InputError(f"{field} must be a finite number from {minimum} to {maximum}") from None
     if not math.isfinite(number) or not minimum <= number <= maximum:
         raise InputError(f"{field} must be a finite number from {minimum} to {maximum}")
@@ -209,6 +209,8 @@ def load_scan_csv(path: Path) -> tuple[ScanPoint, ...]:
     for row_number, row in enumerate(reader, start=2):
         if len(points) >= MAX_SCAN_ROWS:
             raise InputError(f"scan input exceeds the {MAX_SCAN_ROWS}-row limit")
+        if None in row:
+            raise InputError(f"scan row {row_number} must contain exactly 2 columns")
         frequency = parse_mhz_to_khz(row["frequency_mhz"], f"scan row {row_number} frequency_mhz")
         power = _finite_float(row["power_dbm"], f"scan row {row_number} power_dbm", -300, 300)
         points.append(ScanPoint(frequency, power))

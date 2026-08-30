@@ -1,0 +1,23 @@
+{
+  "requested": 6,
+  "spares": 1,
+  "ranges": [
+    {
+      "start_mhz": "470.100",
+      "end_mhz": "480.000",
+      "step_khz": 50
+    }
+  ],
+  "minimum_spacing_khz": 200,
+  "intermod_guard_khz": 250,
+  "exclusions": [
+    {
+      "start_mhz": "471.000",
+      "end_mhz": "471.300",
+      "label": "known local carrier"
+    }
+  ],
+  "scan_threshold_dbm": -75,
+  "scan_guard_khz": 100,
+  "max_search_nodes": 250000
+}
